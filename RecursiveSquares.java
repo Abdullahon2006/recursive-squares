@@ -6,13 +6,20 @@ public class RecursiveSquares {
         StdDraw.setPenColor(StdDraw.BLACK);
         StdDraw.square(x, y, length/2);
     }
+
     public static void draw(int n, double x, double y, double length) {
-        if (n <= 0) return;
-        draw(n - 1, x - length/2, y - length/2, length/2);
-        draw(n - 1, x - length/2, y + length/2, length/2);
-        draw(n - 1, x + length/2, y - length/2, length/2);
-        draw(n - 1, x + length/2, y + length/2, length/2);
+        if (n == 0) return;
+        
+        // Draw the larger squares first
+        draw(n-1, x - length/2, y + length/2, length/2);  // upper left
+        draw(n-1, x + length/2, y + length/2, length/2);  // upper right
+        
+        // Draw the main square
         drawSquare(x, y, length);
+        
+        // Draw the smaller squares after
+        draw(n-1, x - length/2, y - length/2, length/2);  // lower left
+        draw(n-1, x + length/2, y - length/2, length/2);  // lower right
     }
 
     public static void main(String[] args) {
